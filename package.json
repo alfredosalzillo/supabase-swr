@@ -1,6 +1,6 @@
 {
   "name": "supabase-swr",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "description": "A component library to use https://github.com/supabase/supabase-js with https://github.com/vercel/swr",
   "keywords": [
     "supabase",
@@ -48,12 +48,14 @@
     "microbundle": "^0.13.3",
     "react": "16.9.0",
     "react-dom": "16.9.0",
+    "swr": "^1.0.0",
     "ts-jest": "^27.0.5",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "@supabase/supabase-js": "*",
-    "react": "*"
+    "react": "*",
+    "swr": "*"
   },
   "scripts": {
     "dev": "microbundle watch  --jsx React.createElement --tsconfig tsconfig.json",
@@ -63,6 +65,7 @@
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
-    "release": "yarn -s prepare && npm publish"
+    "release": "yarn -s prepare && npm publish",
+    "release:alpha": "yarn -s prepare && npm publish --tag alpha"
   }
 }
