@@ -1,0 +1,66 @@
+{
+  "name": "supabase-swr",
+  "version": "0.0.1",
+  "description": "A component library to use https://github.com/supabase/supabase-js with https://github.com/vercel/swr",
+  "keywords": [
+    "supabase",
+    "react",
+    "swr"
+  ],
+  "repository": "https://github.com/alfredosalzillo/supabase-swr",
+  "author": "alfredo.salzillo <noctisbels@gmai.com>",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "source": "src/index.tsx",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "umd:main": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "devDependencies": {
+    "@babel/preset-env": "7.5.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.1",
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.17",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "4.17.0",
+    "@typescript-eslint/parser": "^4.29.3",
+    "babel-eslint": "10.0.2",
+    "babel-preset-env": "1.7.0",
+    "bundlesize": "0.17.2",
+    "documentation": "12.0.3",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "jest": "^27.0.6",
+    "jest-fetch-mock": "^3.0.3",
+    "microbundle": "^0.13.3",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.3.5"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "scripts": {
+    "dev": "microbundle watch  --jsx React.createElement --tsconfig tsconfig.json",
+    "build": "microbundle --jsx React.createElement --tsconfig tsconfig.json",
+    "lint": "eslint -c .eslintrc.js ./src/*.tsx --fix",
+    "prepare": "rm -rf dist && yarn build",
+    "test": "jest --config jest.config.js",
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage",
+    "release": "yarn -s prepare && npm publish"
+  }
+}
