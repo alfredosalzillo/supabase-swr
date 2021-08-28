@@ -37,7 +37,7 @@
     "babel-preset-env": "1.7.0",
     "bundlesize": "0.17.2",
     "documentation": "12.0.3",
-    "eslint": "5.16.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
@@ -60,7 +60,7 @@
   "scripts": {
     "dev": "microbundle watch  --jsx React.createElement --tsconfig tsconfig.json",
     "build": "microbundle --jsx React.createElement --tsconfig tsconfig.json",
-    "lint": "eslint -c .eslintrc.js ./src/*.tsx --fix",
+    "lint": "eslint -c .eslintrc.cjs ./src/*.ts* --fix",
     "prepare": "rm -rf dist && yarn build",
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch",

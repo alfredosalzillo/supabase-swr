@@ -24,7 +24,7 @@
   "include": [
     "src",
     "test",
-    ".eslintrc.js",
+    ".eslintrc.cjs",
     "jest.config.js"
   ]
 }
