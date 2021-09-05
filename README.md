@@ -143,6 +143,18 @@ export default function (props) {
 }
 ```
 
+### useSession
+
+Subscribe to `authStateChange` event and always return the current session.
+Useful to use inside component that need to change when the user sign-in or sign-out.
+
+```typescript jsx
+export default function (props) {
+  const session = useSession();
+  if (!session) return <>Need to sign-in to access this feature</>
+  return (<>...</>)
+}
+
 ---
 
 Inspired by [react-supabase](https://github.com/tmm/react-supabase).
