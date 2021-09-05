@@ -1,6 +1,6 @@
 {
   "name": "supabase-swr",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "A component library to use https://github.com/supabase/supabase-js with https://github.com/vercel/swr",
   "keywords": [
     "supabase",
