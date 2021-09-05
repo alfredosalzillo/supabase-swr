@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { PostgrestSingleSuccessResponse, PostgrestSuccessResponse } from '../types';
 import useClient from './useClient';
-import { SelectKeyConfig } from '../select-key';
+import { QueryConfig } from '../query';
 
 export type Fetcher<Data> = (
   table: string,
-  config: SelectKeyConfig<Data>,
+  config: QueryConfig<Data>,
 ) => Promise<PostgrestSuccessResponse<Data>>;
 export type FetcherSingle<Data> = (
   table: string,
-  config: SelectKeyConfig<Data>,
+  config: QueryConfig<Data>,
 ) => Promise<PostgrestSingleSuccessResponse<Data>>;
 
 type FetcherType = 'multiple' | 'single' | 'maybeSingle' | 'csv';
@@ -21,7 +21,7 @@ function createFetcher<Data>(client: SupabaseClient, type: 'maybeSingle'): Fetch
 function createFetcher(client: SupabaseClient, type: 'csv'): FetcherSingle<string>;
 function createFetcher(client: SupabaseClient, type: FetcherType) {
   return async (
-    table: string, config: SelectKeyConfig<any>,
+    table: string, config: QueryConfig<any>,
   ) => {
     const select = client.from(table).select(config.columns, {
       count: config.count,

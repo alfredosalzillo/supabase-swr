@@ -94,17 +94,17 @@ export default function (props) {
 }
 ```
 
-#### useSelectKey
+#### useQuery
 
-Create the key to use with `useSelect` and other hooks.
+Create a `Query` to use with `useSelect` and other hooks.
 
 ```typescript jsx
 type Todo = {}
 
 export default function (props) {
-  const selectKey = useSelectKey<Todo>('todos', {
+  const query = useQuery<Todo>('todos', {
     // the filter ro apply to the query
-    filter: (query) => query.order('created_at', { ascending: false }),
+    filter: (q) => q.order('created_at', { ascending: false }),
     head: false,
     count: 'exact',
   });
@@ -127,15 +127,15 @@ Return and SwrResponse.
 type Todo = {}
 
 export default function (props) {
-  const selectKey = useSelectKey<Todo>('todos', {
+  const query = useQuery<Todo>('todos', {
     // the filter ro apply to the query
-    filter: (query) => query.order('created_at', { ascending: false }),
+    filter: (q) => q.order('created_at', { ascending: false }),
     head: false,
     count: 'exact',
   });
   const {
     data
-  } = useSelect(selectKey, {
+  } = useSelect(query, {
     // swr config here
   });
   // ...
