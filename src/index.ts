@@ -5,3 +5,4 @@ export { default as useClient } from './hooks/useClient';
 export { default as useQuery } from './hooks/useQuery';
 export { default as useSelect } from './hooks/useSelect';
 export { default as useSelectSingle } from './hooks/useSelectSingle';
+export { default as useSelectMaybeSingle } from './hooks/useSelectMaybeSingle';
