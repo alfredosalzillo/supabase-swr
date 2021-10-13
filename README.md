@@ -97,6 +97,7 @@ export default function (props) {
 #### useQuery
 
 Create a `Query` to use with `useSelect` and other hooks.
+The created query is also a [swr](https://github.com/vercel/swr) key and can be used with [mutate](https://swr.vercel.app/docs/mutation).
 
 ```typescript jsx
 type Todo = {}
@@ -155,6 +156,84 @@ export default function (props) {
   return (<>...</>)
 }
 ```
+## createQuery
+
+Create a global `Query` to use with `useSelect` and other hooks.
+The created query is also a [swr](https://github.com/vercel/swr) key and can be used with [mutate](https://swr.vercel.app/docs/mutation).
+
+```typescript jsx
+import { useSWRConfig } from 'swr';
+import { useState } from 'react';
+import { createClient } from 'supabase-js';
+import { SwrSupabaseContext, useSelect, createQuery } from 'supabase-swr';
+
+const client = createClient('https://xyzcompany.supabase.co', 'public-anon-key');
+
+type Todo = {
+  id: string,
+  name: string,
+  created_at: string,
+}
+
+const todosQuery = createQuery<Todo>('todos', {
+  columns: '*',
+  // the filter ro apply to the query
+  filter: (q) => q.order('created_at', { ascending: false }),
+})
+
+function AddTodoForm() {
+  const { mutate } = useSWRConfig()
+  const client = useClient()
+  const [todoName, setTodoName] = useState('')
+  const addTodo = () => {
+    client.from<Todo>('todos').insert({
+      name: todoName,
+    }).then(() => {
+      // update the todosQuery inside the TodosList
+      mutate(todosQuery)
+      setTodoName('')
+    })
+  }
+  return (
+    <form name="add-todo">
+      <input name="todo-name" value={todoName} onChange={(e) => setTodoName(e.target.value)} />
+      <button onClick={addTodo}>
+        Add Todo
+      </button>  
+    </form>
+  )
+}
+
+function TodosList() {
+  const {
+    data: {
+      data: todos,
+    },
+  } = useSelect(todosQuery, {
+    // swr config here
+  });
+  // ...
+  return (
+    <ul>
+      {todos.map((todo: Todo) => (
+        <li key={todo.id}>
+          {todo.name}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function App() {
+  return (
+    <SwrSupabaseContext.Provider value={client}>
+      <TodosList />
+      <AddTodoForm />
+    </SwrSupabaseContext.Provider>
+  )
+}
+```
+
 ---
 
 Inspired by [react-supabase](https://github.com/tmm/react-supabase).
