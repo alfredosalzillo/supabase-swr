@@ -39,7 +39,7 @@ Now you can use in any component the api of supabase-swr.
 
 ```typescript jsx
 import React from 'react';
-import { useClient, useSelect, useSelectKey } from 'supabase-swr';
+import { useClient, useSelect, useQuery } from 'supabase-swr';
 
 type Todo = {
   id: string,
@@ -48,7 +48,7 @@ type Todo = {
 };
 
 const Todos = () => {
-  const todosKey = useSelectKey<Todo>('todos', {
+  const todosQuery = useQuery<Todo>('todos', {
     filter: (query) => query.order('created_at', { ascending: false }),
   }, []);
   const {
@@ -56,7 +56,7 @@ const Todos = () => {
       data: todos,
     },
     mutate,
-  } = useSelect(todosKey, {
+  } = useSelect(todosQuery, {
     // any swr config
     revalidateOnMount: true,
     suspense: true,
@@ -154,7 +154,7 @@ export default function (props) {
   if (!session) return <>Need to sign-in to access this feature</>
   return (<>...</>)
 }
-
+```
 ---
 
 Inspired by [react-supabase](https://github.com/tmm/react-supabase).
