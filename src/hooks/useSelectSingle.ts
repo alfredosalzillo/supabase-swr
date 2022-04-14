@@ -4,7 +4,7 @@ import { Query } from '../query';
 import useFetcher from './useFetcher';
 
 const useSelectSingle = <Data>(
-  query: Query<Data>, swrConfig: Omit<SWRConfiguration, 'fetcher'>,
+  query: Query<Data> | null, swrConfig: Omit<SWRConfiguration, 'fetcher'>,
 ): SWRResponse<PostgrestSingleSuccessResponse<Data>, PostgrestError> => {
   const fetcher = useFetcher<Data>('single');
   return useSWR(query, fetcher, swrConfig);
