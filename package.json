@@ -13,7 +13,7 @@
   "private": false,
   "type": "module",
   "source": "src/index.ts",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.es.js",
   "umd:main": "dist/index.umd.js",
   "types": "dist/index.d.ts",
